@@ -30,6 +30,7 @@
                 <input type="text"
                        class="form-control"
                        name="username"
+                       th:field="*{username}"
                        placeholder="Username"
                        autocomplete="off"
                        required>
@@ -42,6 +43,7 @@
                 <input type="email"
                        class="form-control"
                        name="email"
+                       th:field="*{email}"
                        placeholder="Email"
                        required>
                 <div th:if="${#fields.hasErrors('email')}"
@@ -53,6 +55,7 @@
                 <input type="password"
                        id="password"
                        class="form-control"
+                       th:field="*{password}"
                        autocomplete="new-password"
                        name="password"
                        placeholder="Password"

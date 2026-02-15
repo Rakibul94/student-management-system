@@ -1,7 +1,7 @@
 package com.studentmanagementsystem.controller;
 
 import com.studentmanagementsystem.data.StudentData;
-import com.studentmanagementsystem.exceptions.NotFoundException;
+import com.studentmanagementsystem.exceptions.StudentNotFoundException;
 import com.studentmanagementsystem.servicefacade.DepartmentServiceFacade;
 import com.studentmanagementsystem.servicefacade.StudentServiceFacade;
 import jakarta.validation.Valid;
@@ -48,7 +48,7 @@ public class StudentController {
             model.addAttribute("studentData", studentServiceFacade.getStudentById(id));
             model.addAttribute("departmentList", departmentServiceFacade.getAllDepartments());
             return "student_edit";
-        } catch (NotFoundException e) {
+        } catch (StudentNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
             return "redirect:/students";
         } catch (Exception e) {
@@ -112,7 +112,7 @@ public class StudentController {
             studentServiceFacade.deleteStudentById(id);
             redirectAttributes.addFlashAttribute("message", "Delete Successful");
             return "redirect:/students";
-        } catch (NotFoundException e) {
+        } catch (StudentNotFoundException  e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
             return "redirect:/students";
         }

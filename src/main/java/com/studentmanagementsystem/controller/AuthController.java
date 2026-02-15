@@ -1,6 +1,7 @@
 package com.studentmanagementsystem.controller;
 
 import com.studentmanagementsystem.data.UserData;
+import com.studentmanagementsystem.exceptions.EmailAlreadyExistsException;
 import com.studentmanagementsystem.exceptions.UserAlreadyExistsException;
 import com.studentmanagementsystem.servicefacade.UserServiceFacade;
 import jakarta.validation.Valid;
@@ -64,7 +65,10 @@ public class AuthController {
         catch (UserAlreadyExistsException e) {
             redirectAttributes.addFlashAttribute(
                     "message",
-                    "Username already exists");
+                    "Username Already Exists");
+            return "redirect:/signup";
+        }catch(EmailAlreadyExistsException e){
+            redirectAttributes.addFlashAttribute("message", "Email Already Exists");
             return "redirect:/signup";
         }
         catch (Exception e) {
@@ -75,7 +79,7 @@ public class AuthController {
 //         try{
 //             userServiceFacade.signup(userData);
 //         }
-//         catch (ApplicationExceptions.UserAlreadyExistsException e,){
+//         catch (UserAlreadyExistsException e){
 //            // This adds a **field error** to 'username' in BindingResult
 //            bindingResult.rejectValue(
 //                    "username",       // field name in UserData

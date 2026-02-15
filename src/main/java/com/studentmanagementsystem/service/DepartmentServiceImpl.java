@@ -1,5 +1,5 @@
 package com.studentmanagementsystem.service;
-import com.studentmanagementsystem.exceptions.NotFoundException;
+import com.studentmanagementsystem.exceptions.DepartmentNotFoundException;
 import com.studentmanagementsystem.model.Department;
 import com.studentmanagementsystem.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department getDepartmentById(Long id) {
 
         return departmentRepository.findById(id).orElseThrow(() ->
-                new NotFoundException("Department not found")
+                new DepartmentNotFoundException("Department not found")
         );
     }
 
@@ -44,7 +44,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void deleteDepartmentById(Long id) {
 
         if (!departmentRepository.existsById(id)) {
-            throw new NotFoundException("Department not found");
+            throw new DepartmentNotFoundException("Department not found");
         }
         departmentRepository.deleteById(id);
 

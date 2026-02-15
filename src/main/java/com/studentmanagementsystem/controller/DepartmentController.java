@@ -1,7 +1,7 @@
 package com.studentmanagementsystem.controller;
 
 import com.studentmanagementsystem.data.DepartmentData;
-import com.studentmanagementsystem.exceptions.NotFoundException;
+import com.studentmanagementsystem.exceptions.DepartmentNotFoundException;
 import com.studentmanagementsystem.servicefacade.DepartmentServiceFacade;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -24,13 +24,11 @@ public class DepartmentController {
     public String updateDepartment(@PathVariable Long id,
                                    @Valid @ModelAttribute("departmentData") DepartmentData departmentData,
                                    BindingResult bindingResult,
-                                   Model model,
                                    RedirectAttributes redirectAttributes) {
 
         if(bindingResult.hasErrors()){
             return "department_edit";
         }
-
         try{
             departmentServiceFacade.updateDepartment(departmentData);
             redirectAttributes.addFlashAttribute("message", "Update Successful");
@@ -52,7 +50,7 @@ public class DepartmentController {
             model.addAttribute("departmentData", departmentServiceFacade.getDepartmentById(id));
             return "department_edit";
         }
-        catch (NotFoundException e) {
+        catch (DepartmentNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
             return "redirect:/departments";
         }
@@ -95,8 +93,6 @@ public class DepartmentController {
             return "redirect:/departments";
         }
 
-
-
     }
 
     @DeleteMapping("/{id}/delete")
@@ -107,7 +103,7 @@ public class DepartmentController {
             departmentServiceFacade.deleteDepartmentById(id);
             redirectAttributes.addFlashAttribute("message", "Delete Successful");
             return "redirect:/departments";
-        } catch (NotFoundException e) {
+        } catch (DepartmentNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
             return "redirect:/departments";
         } catch (Exception e) {

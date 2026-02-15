@@ -2,6 +2,7 @@ package com.studentmanagementsystem.service;
 
 
 import com.studentmanagementsystem.data.UserData;
+import com.studentmanagementsystem.exceptions.EmailAlreadyExistsException;
 import com.studentmanagementsystem.exceptions.UserAlreadyExistsException;
 import com.studentmanagementsystem.model.User;
 import com.studentmanagementsystem.repository.UserRepository;
@@ -27,9 +28,16 @@ public class UserServiceImpl implements UserService{
            throw new UserAlreadyExistsException("Username already exists"); //It is handled by
             //AuthController
         }
+
+        if (userRepository.findByEmail(userData.getEmail()).isPresent()) {
+            throw new EmailAlreadyExistsException("Email already exists");
+        }
+
+
         //This username is stored in DB
         User user = new User();
         user.setUsername(userData.getUsername());
+        user.setEmail(userData.getEmail());
         user.setPassword(passwordEncoder.encode(userData.getPassword()));
         user.setRole("ROLE_ADMIN"); //Admin is the only user at the moment for this webpage
 

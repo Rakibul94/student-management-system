@@ -2,7 +2,7 @@ package com.studentmanagementsystem.service;
 
 
 import com.studentmanagementsystem.data.UserData;
-import com.studentmanagementsystem.exceptions.ApplicationExceptions;
+import com.studentmanagementsystem.exceptions.UserAlreadyExistsException;
 import com.studentmanagementsystem.model.User;
 import com.studentmanagementsystem.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService{
 
         //Check for username already exists
         if (userRepository.findByUsername(userData.getUsername()).isPresent()) {
-           throw new ApplicationExceptions.UserAlreadyExistsException("Username already exists"); //It is handled by
+           throw new UserAlreadyExistsException("Username already exists"); //It is handled by
             //AuthController
         }
         //This username is stored in DB

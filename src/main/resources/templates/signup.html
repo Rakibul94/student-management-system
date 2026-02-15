@@ -44,6 +44,8 @@
                        name="email"
                        placeholder="Email"
                        required>
+                <div th:if="${#fields.hasErrors('email')}"
+                     th:errors="*{email}"></div>
             </div>
 
             <!-- Password -->

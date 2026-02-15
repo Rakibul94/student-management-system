@@ -1,5 +1,6 @@
 package com.studentmanagementsystem.service;
 
+import com.studentmanagementsystem.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 import com.studentmanagementsystem.model.Student;
 import com.studentmanagementsystem.repository.StudentRepository;
@@ -29,13 +30,18 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student getStudentById(Long id) {
-        return studentRepository.findById(id).orElse(null);
+
+        return studentRepository.findById(id).orElseThrow(() ->
+                new NotFoundException("Student not found"));
     }
 
 
     @Override
     public void deleteStudentById(Long id) {
-         studentRepository.deleteById(id);
+        if (!studentRepository.existsById(id)) {
+            throw new NotFoundException("Student not found");
+        }
+        studentRepository.deleteById(id);
     }
 
 }

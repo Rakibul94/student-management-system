@@ -48,17 +48,23 @@
                             </div>
                                 <div class="mb-3">
                                     <label class="form-label">Department</label>
-                                    <select class="form-select" name="department" th:field="*{departmentId}" required>
+
+                                    <select class="form-select" th:field="*{departmentData.id}" required>
                                         <option value="">-- Select Department --</option>
                                         <option th:each="dept : ${departmentList}"
                                                 th:value="${dept.id}"
                                                 th:text="${dept.name}">
                                         </option>
                                     </select>
-                                    <p th:if="${#fields.hasErrors('departmentId')}"
-                                       th:errors="*{departmentId}"></p>
+
+                                    <p class="text-danger"
+                                       th:if="${#fields.hasErrors('departmentData.id')}"
+                                       th:errors="*{departmentData.id}">
+                                    </p>
                                 </div>
-                            <button type="submit" class="btn btn-primary">Add Student</button>
+
+
+                                <button type="submit" class="btn btn-primary">Add Student</button>
                         </form>
                     </div>
                 </div>

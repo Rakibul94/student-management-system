@@ -21,8 +21,12 @@ public class StudentMapper {
         studentData.setEmail(student.getEmail());
         studentData.setCgpa(student.getCgpa());
         studentData.setProgram(student.getProgram());
-        studentData.setDepartmentId(student.getDepartment().getId());
-        studentData.setDepartmentName(student.getDepartment().getName());
+
+        DepartmentData departmentData = new DepartmentData();
+        departmentData.setId(student.getDepartment().getId());
+        departmentData.setName(student.getDepartment().getName());
+
+        studentData.setDepartmentData(departmentData);
 
         return studentData;
     }
@@ -39,7 +43,8 @@ public class StudentMapper {
         student.setProgram(studentData.getProgram());
 
         Department department = new Department();
-        department.setId(studentData.getDepartmentId());
+        department.setId(studentData.getDepartmentData().getId());
+        department.setName(studentData.getDepartmentData().getName());
         student.setDepartment(department);
 
 
@@ -57,7 +62,7 @@ public class StudentMapper {
         student.setProgram(studentData.getProgram());
 
         Department department = new Department();
-        department.setId(studentData.getDepartmentId());
+        department.setId(studentData.getDepartmentData().getId());
         student.setDepartment(department);
     }
 

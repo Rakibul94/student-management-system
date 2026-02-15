@@ -1,7 +1,7 @@
 package com.studentmanagementsystem.controller;
 
 import com.studentmanagementsystem.data.UserData;
-import com.studentmanagementsystem.exceptions.ApplicationExceptions;
+import com.studentmanagementsystem.exceptions.UserAlreadyExistsException;
 import com.studentmanagementsystem.servicefacade.UserServiceFacade;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -60,18 +60,22 @@ public class AuthController {
         //Using Redirect attribute
         try{
              userServiceFacade.signup(userData);
-         }
-         catch (ApplicationExceptions.UserAlreadyExistsException e) {
+        }
+        catch (UserAlreadyExistsException e) {
             redirectAttributes.addFlashAttribute(
                     "message",
                     "Username already exists");
+            return "redirect:/signup";
+        }
+        catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
             return "redirect:/signup";
         }
         //Using Binding Result
 //         try{
 //             userServiceFacade.signup(userData);
 //         }
-//         catch (RuntimeException e){
+//         catch (ApplicationExceptions.UserAlreadyExistsException e,){
 //            // This adds a **field error** to 'username' in BindingResult
 //            bindingResult.rejectValue(
 //                    "username",       // field name in UserData

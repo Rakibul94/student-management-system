@@ -14,8 +14,6 @@ public class UserServiceFacadeImpl implements UserServiceFacade {
 
     @Override
     public void signup(UserData userData) {
-
         userService.signup(userData);
-
     }
 }

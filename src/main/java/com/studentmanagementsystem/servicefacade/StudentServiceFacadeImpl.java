@@ -27,7 +27,6 @@ public class StudentServiceFacadeImpl implements StudentServiceFacade{
         this.studentMapper = studentMapper;
     }
 
-
     @Override
     public List<StudentData> getAllStudents() {
         return studentService.getAllStudents()
@@ -69,7 +68,7 @@ public class StudentServiceFacadeImpl implements StudentServiceFacade{
 
     @Override
     public void deleteStudentById(Long id) {
-         studentService.deleteStudentById(id);
+        studentService.deleteStudentById(id);
     }
 
 

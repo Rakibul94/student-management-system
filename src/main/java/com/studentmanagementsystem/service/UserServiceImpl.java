@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService{
     private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder) {
+                           PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -25,14 +25,13 @@ public class UserServiceImpl implements UserService{
 
         //Check for username already exists
         if (userRepository.findByUsername(userData.getUsername()).isPresent()) {
-           throw new UserAlreadyExistsException("Username already exists"); //It is handled by
+            throw new UserAlreadyExistsException("Username already exists"); //It is handled by
             //AuthController
         }
 
         if (userRepository.findByEmail(userData.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
-
 
         //This username is stored in DB
         User user = new User();

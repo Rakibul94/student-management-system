@@ -13,7 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-
         httpSecurity
                 //Request Authorization
                 .csrf(AbstractHttpConfigurer::disable) //csrf is disabled here
@@ -34,8 +33,6 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/login?logout=true")
                         .permitAll()
                 );
-
         return httpSecurity.build();
     }
-
 }

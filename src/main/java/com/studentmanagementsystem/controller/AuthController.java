@@ -44,8 +44,7 @@ public class AuthController {
     @PostMapping("/signup")
     public String signup(@Valid UserData userData,
                          BindingResult bindingResult,
-                         RedirectAttributes redirectAttributes,
-                         Model model) {
+                         RedirectAttributes redirectAttributes) {
 
         // Check if validation errors exist
         //bindingResults successfully binds form data to java object
@@ -66,10 +65,14 @@ public class AuthController {
                     "Username Already Exists");
             return "redirect:/signup";
         }catch(EmailAlreadyExistsException e){
-            redirectAttributes.addFlashAttribute("message", "Email Already Exists");
+            redirectAttributes.addFlashAttribute(
+                    "message",
+                    "Email Already Exists");
             return "redirect:/signup";
         }catch(Exception e) {
-            redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
+            redirectAttributes.addFlashAttribute(
+                    "message",
+                    "Unexpected Exception");
             return "redirect:/signup";
         }
         //Using Binding Result
@@ -87,7 +90,6 @@ public class AuthController {
 //
 //            return "signup";
 //        }
-
         redirectAttributes.addFlashAttribute("message", "Signup successful!");
         return "redirect:/login";
 

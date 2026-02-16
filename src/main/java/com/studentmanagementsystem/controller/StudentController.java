@@ -32,7 +32,7 @@ public class StudentController {
 
 
     @GetMapping("/new")
-    public String showAddStudentForm(Model model,@ModelAttribute("studentData") StudentData studentData) {
+    public String showAddStudentForm(Model model, @ModelAttribute("studentData") StudentData studentData) {
         model.addAttribute("departmentList", departmentServiceFacade.getAllDepartments());
         return "student_add";
     }
@@ -53,21 +53,16 @@ public class StudentController {
             redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
         }
         return "redirect:/students";
-
-
     }
-
 
     @PostMapping
     public String addStudent(@Valid @ModelAttribute StudentData studentData,
                              BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes,
-                             Model model) {
+                             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             return "student_add";
         }
-
         try {
             studentServiceFacade.createStudent(studentData);
             redirectAttributes.addFlashAttribute("message", "Student added successfully");
@@ -77,18 +72,15 @@ public class StudentController {
         return "redirect:/students";
     }
 
-
     @PutMapping("/{id}")
     public String updateStudent(@PathVariable Long id,
                                 @Valid @ModelAttribute("studentData") StudentData studentData,
                                 BindingResult bindingResult,
-                                Model model,
                                 RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             return "student_edit";
         }
-
         try {
             studentServiceFacade.updateStudent(studentData);
             redirectAttributes.addFlashAttribute("message", "Update Successful");
@@ -99,23 +91,12 @@ public class StudentController {
 
     }
 
-
     @DeleteMapping("/{id}/delete")
-    public String deleteStudent(@PathVariable Long id,
-                                RedirectAttributes redirectAttributes) {
-        try {
-            studentServiceFacade.deleteStudentById(id);
-            redirectAttributes.addFlashAttribute("message", "Delete Successful");        } catch (StudentNotFoundException  e) {
-            redirectAttributes.addFlashAttribute("message", e.getMessage());
-        }
-        catch (Exception e) {
-            redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
-        }
+    public String deleteStudent(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        studentServiceFacade.deleteStudentById(id);
+        redirectAttributes.addFlashAttribute("message", "Delete Successful");
         return "redirect:/students";
-
-
     }
-
 }
 
 

@@ -22,7 +22,6 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.save(student);
     }
 
-
     @Override
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
@@ -35,12 +34,8 @@ public class StudentServiceImpl implements StudentService {
                 new StudentNotFoundException("Student not found"));
     }
 
-
     @Override
     public void deleteStudentById(Long id) {
-        if (!studentRepository.existsById(id)) {
-            throw new StudentNotFoundException("Student not found");
-        }
         studentRepository.deleteById(id);
     }
 

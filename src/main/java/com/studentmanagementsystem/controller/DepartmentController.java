@@ -37,7 +37,6 @@ public class DepartmentController {
             redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
         }
         return "redirect:/departments";
-
     }
 
     @GetMapping("/{id}/edit")
@@ -87,24 +86,12 @@ public class DepartmentController {
             redirectAttributes.addFlashAttribute("message", "Department add failed");
         }
         return "redirect:/departments";
-
     }
 
     @DeleteMapping("/{id}/delete")
-    public String deleteDepartment(@PathVariable Long id,
-                                   RedirectAttributes redirectAttributes) {
-
-        try {
-            departmentServiceFacade.deleteDepartmentById(id);
-            redirectAttributes.addFlashAttribute("message", "Delete Successful");
-
-        } catch (DepartmentNotFoundException e) {
-            redirectAttributes.addFlashAttribute("message", e.getMessage());
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
-        }
+    public String deleteDepartment(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        departmentServiceFacade.deleteDepartmentById(id);
+        redirectAttributes.addFlashAttribute("message", "Delete Successful");
         return "redirect:/departments";
-
-
     }
 }

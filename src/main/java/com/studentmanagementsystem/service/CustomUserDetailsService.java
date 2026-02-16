@@ -25,7 +25,6 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Username cannot be empty");
         }
 
-
         //Fetch a user from DB
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() ->
@@ -39,6 +38,4 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .authorities(user.getRole())
                 .build();
     }
-
-
 }

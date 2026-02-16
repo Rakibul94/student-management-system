@@ -14,7 +14,6 @@ public class StudentMapper {
     public StudentData toData(Student student) {
         if (student == null) return null;
 
-
         StudentData studentData = new StudentData();
         studentData.setId(student.getId());
         studentData.setName(student.getName());
@@ -28,8 +27,6 @@ public class StudentMapper {
             departmentData.setName(student.getDepartment().getName());
             studentData.setDepartmentData(departmentData);
         }
-
-
         return studentData;
     }
 
@@ -50,7 +47,6 @@ public class StudentMapper {
             department.setName(studentData.getDepartmentData().getName());
             student.setDepartment(department);
         }
-
         return student;
     }
 

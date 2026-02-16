@@ -34,7 +34,6 @@ public class DepartmentMapper {
 
     public void updateEntity(Department department,
                              DepartmentData departmentData) {
-
         department.setName(departmentData.getName());
 
     }

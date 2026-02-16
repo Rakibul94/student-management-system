@@ -55,20 +55,16 @@ public class StudentServiceFacadeImpl implements StudentServiceFacade{
     }
 
     @Override
-    public StudentData createStudent(StudentData studentData) {
-
+    public void createStudent(StudentData studentData) {
         Student student = studentMapper.toEntity(studentData);
-
-        return studentMapper.toData(studentService.saveStudent(student));
+        studentService.saveStudent(student);
     }
 
     @Override
-    public StudentData updateStudent(StudentData studentData) {
+    public void updateStudent(StudentData studentData) {
         Student existingStudent = studentService.getStudentById(studentData.getId());
-
         studentMapper.updateEntity(existingStudent, studentData);
-
-        return studentMapper.toData(studentService.saveStudent(existingStudent));
+        studentService.saveStudent(existingStudent);
     }
 
     @Override

@@ -51,20 +51,18 @@ public class DepartmentServiceFacadeImpl implements DepartmentServiceFacade {
     }
 
     @Override
-    public DepartmentData createDepartment(DepartmentData departmentData) {
-
+    public void createDepartment(DepartmentData departmentData) {
         Department department = departmentMapper.toEntity(departmentData);
-
-        return departmentMapper.toData(departmentService.saveDepartment(department));
+        departmentService.saveDepartment(department);
     }
 
     @Override
-    public DepartmentData updateDepartment(DepartmentData departmentData) {
+    public void updateDepartment(DepartmentData departmentData) {
         Department existingDepartment =
                 departmentService.getDepartmentById(departmentData.getId());
 
         departmentMapper.updateEntity(existingDepartment,departmentData);
-        return departmentMapper.toData(departmentService.saveDepartment(existingDepartment));
+        departmentService.saveDepartment(existingDepartment);
     }
 
     @Override

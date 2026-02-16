@@ -32,8 +32,7 @@ public class StudentController {
 
 
     @GetMapping("/new")
-    public String showAddStudentForm(Model model) {
-        model.addAttribute("studentData", new StudentData());
+    public String showAddStudentForm(Model model,@ModelAttribute("studentData") StudentData studentData) {
         model.addAttribute("departmentList", departmentServiceFacade.getAllDepartments());
         return "student_add";
     }
@@ -50,11 +49,10 @@ public class StudentController {
             return "student_edit";
         } catch (StudentNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
-            return "redirect:/students";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
-            return "redirect:/students";
         }
+        return "redirect:/students";
 
 
     }
@@ -73,12 +71,10 @@ public class StudentController {
         try {
             studentServiceFacade.createStudent(studentData);
             redirectAttributes.addFlashAttribute("message", "Student added successfully");
-            return "redirect:/students";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", "Student add failed");
-            return "redirect:/students";
         }
-
+        return "redirect:/students";
     }
 
 
@@ -96,11 +92,10 @@ public class StudentController {
         try {
             studentServiceFacade.updateStudent(studentData);
             redirectAttributes.addFlashAttribute("message", "Update Successful");
-            return "redirect:/students";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", "Update Failed");
-            return "redirect:/students";
         }
+        return "redirect:/students";
 
     }
 
@@ -110,16 +105,13 @@ public class StudentController {
                                 RedirectAttributes redirectAttributes) {
         try {
             studentServiceFacade.deleteStudentById(id);
-            redirectAttributes.addFlashAttribute("message", "Delete Successful");
-            return "redirect:/students";
-        } catch (StudentNotFoundException  e) {
+            redirectAttributes.addFlashAttribute("message", "Delete Successful");        } catch (StudentNotFoundException  e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
-            return "redirect:/students";
         }
         catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
-            return "redirect:/students";
         }
+        return "redirect:/students";
 
 
     }

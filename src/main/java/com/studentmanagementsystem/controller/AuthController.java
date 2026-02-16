@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -36,10 +37,7 @@ public class AuthController {
 
 
     @GetMapping("/signup")
-    public String signupPage(Model model) {
-        //When signup page is loaded an empty UserData object is created
-        //Thymeleaf uses this to render the form with fields bound to this object
-        model.addAttribute("userData", new UserData());
+    public String signupPage(@ModelAttribute("userData") UserData userData) {
         return "signup";
     }
 
@@ -60,7 +58,7 @@ public class AuthController {
 
         //Using Redirect attribute
         try{
-             userServiceFacade.signup(userData);
+            userServiceFacade.signup(userData);
         }
         catch (UserAlreadyExistsException e) {
             redirectAttributes.addFlashAttribute(
@@ -70,8 +68,7 @@ public class AuthController {
         }catch(EmailAlreadyExistsException e){
             redirectAttributes.addFlashAttribute("message", "Email Already Exists");
             return "redirect:/signup";
-        }
-        catch (Exception e) {
+        }catch(Exception e) {
             redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
             return "redirect:/signup";
         }
@@ -90,6 +87,7 @@ public class AuthController {
 //
 //            return "signup";
 //        }
+
         redirectAttributes.addFlashAttribute("message", "Signup successful!");
         return "redirect:/login";
 

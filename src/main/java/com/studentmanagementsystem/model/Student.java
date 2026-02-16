@@ -22,6 +22,6 @@ public class Student {
     private String program;
 
     @ManyToOne
-    @JoinColumn(name = "department_id", foreignKey = @ForeignKey(name = "fk_student_department"))
+    @JoinColumn(name = "department_id",nullable = false, foreignKey = @ForeignKey(name = "fk_student_department"))
     private Department department;
 }

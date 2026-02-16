@@ -39,7 +39,7 @@
                 <td>[[${student.email}]]</td>
                 <td>[[${student.cgpa}]]</td>
                 <td>[[${student.program}]]</td>
-                <td th:text="${student.departmentData.name}"></td>
+                <td>[[${student.departmentData.name}]]</td>
                 <td>
                   <a th:href="@{/students/{id}/edit(id=${student.id})}"
                      class="btn btn-sm btn-primary">Edit</a>

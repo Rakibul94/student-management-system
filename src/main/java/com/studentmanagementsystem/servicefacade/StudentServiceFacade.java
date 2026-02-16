@@ -10,10 +10,8 @@ public interface StudentServiceFacade {
     List<StudentData> getAllStudents();
 
     StudentData getStudentById(Long id);
-
-    StudentData createStudent(StudentData studentData);
-    StudentData updateStudent(StudentData studentData);
-
+    void createStudent(StudentData studentData);
+    void updateStudent(StudentData studentData);
     void deleteStudentById(Long id);
 
 }

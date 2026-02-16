@@ -2,6 +2,7 @@ package com.studentmanagementsystem.service;
 
 import com.studentmanagementsystem.model.User;
 import com.studentmanagementsystem.repository.UserRepository;
+import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,10 +18,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username)
+    public UserDetails loadUserByUsername(@NonNull String username)
             throws UsernameNotFoundException {
 
-        if (username == null || username.isBlank()) {
+        if (username.isBlank()) {
             throw new UsernameNotFoundException("Username cannot be empty");
         }
 

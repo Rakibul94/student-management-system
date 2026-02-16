@@ -22,11 +22,13 @@ public class StudentMapper {
         studentData.setCgpa(student.getCgpa());
         studentData.setProgram(student.getProgram());
 
-        DepartmentData departmentData = new DepartmentData();
-        departmentData.setId(student.getDepartment().getId());
-        departmentData.setName(student.getDepartment().getName());
+        if (student.getDepartment() != null) {
+            DepartmentData departmentData = new DepartmentData();
+            departmentData.setId(student.getDepartment().getId());
+            departmentData.setName(student.getDepartment().getName());
+            studentData.setDepartmentData(departmentData);
+        }
 
-        studentData.setDepartmentData(departmentData);
 
         return studentData;
     }
@@ -42,11 +44,12 @@ public class StudentMapper {
         student.setCgpa(studentData.getCgpa());
         student.setProgram(studentData.getProgram());
 
-        Department department = new Department();
-        department.setId(studentData.getDepartmentData().getId());
-        department.setName(studentData.getDepartmentData().getName());
-        student.setDepartment(department);
-
+        if (studentData.getDepartmentData() != null) {
+            Department department = new Department();
+            department.setId(studentData.getDepartmentData().getId());
+            department.setName(studentData.getDepartmentData().getName());
+            student.setDepartment(department);
+        }
 
         return student;
     }
@@ -61,9 +64,11 @@ public class StudentMapper {
         student.setCgpa(studentData.getCgpa());
         student.setProgram(studentData.getProgram());
 
-        Department department = new Department();
-        department.setId(studentData.getDepartmentData().getId());
-        student.setDepartment(department);
+        if (studentData.getDepartmentData() != null) {
+            Department department = new Department();
+            department.setId(studentData.getDepartmentData().getId());
+            student.setDepartment(department);
+        }
     }
 
 

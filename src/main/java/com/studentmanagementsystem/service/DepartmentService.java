@@ -9,8 +9,6 @@ public interface DepartmentService {
 
     List<Department> getAllDepartments();
 
-    Department findByName(String name);
-
     Department saveDepartment(Department department);
 
     void deleteDepartmentById(Long id);

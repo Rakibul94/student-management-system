@@ -32,12 +32,11 @@ public class DepartmentController {
         try{
             departmentServiceFacade.updateDepartment(departmentData);
             redirectAttributes.addFlashAttribute("message", "Update Successful");
-            return "redirect:/departments";
         }
         catch(Exception e){
             redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
-            return "redirect:/departments";
         }
+        return "redirect:/departments";
 
     }
 
@@ -52,20 +51,16 @@ public class DepartmentController {
         }
         catch (DepartmentNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
-            return "redirect:/departments";
         }
         catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
-            return "redirect:/departments";
         }
+        return "redirect:/departments";
     }
 
 
     @GetMapping("/new")
-    public String showAddDepartmentForm(Model model) {
-        //This empty object is created for thymeleaf to render the form field to this
-        //object
-        model.addAttribute("departmentData", new DepartmentData());
+    public String showAddDepartmentForm(@ModelAttribute("departmentData") DepartmentData departmentData) {
         return "department_add";
     }
 
@@ -87,29 +82,28 @@ public class DepartmentController {
         try{
             departmentServiceFacade.createDepartment(departmentData);
             redirectAttributes.addFlashAttribute("message", "Department added successfully");
-            return "redirect:/departments";
+
         }catch(Exception e){
             redirectAttributes.addFlashAttribute("message", "Department add failed");
-            return "redirect:/departments";
         }
+        return "redirect:/departments";
 
     }
 
     @DeleteMapping("/{id}/delete")
     public String deleteDepartment(@PathVariable Long id,
-                                    RedirectAttributes redirectAttributes) {
+                                   RedirectAttributes redirectAttributes) {
 
         try {
             departmentServiceFacade.deleteDepartmentById(id);
             redirectAttributes.addFlashAttribute("message", "Delete Successful");
-            return "redirect:/departments";
+
         } catch (DepartmentNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
-            return "redirect:/departments";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
-            return "redirect:/departments";
         }
+        return "redirect:/departments";
 
 
     }

@@ -28,11 +28,6 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentRepository.findAll();
     }
 
-    @Override
-    public Department findByName(String name) {
-
-        return departmentRepository.findByNameIgnoreCase(name).orElse(null);
-    }
 
     @Override
     public Department saveDepartment(Department department) {

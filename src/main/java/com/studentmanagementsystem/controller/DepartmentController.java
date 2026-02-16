@@ -32,8 +32,7 @@ public class DepartmentController {
         try {
             departmentServiceFacade.updateDepartment(departmentData);
             redirectAttributes.addFlashAttribute("message", "Update Successful");
-        }
-        catch (Exception e){
+        }catch (Exception e){
             redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
         }
         return "redirect:/departments";
@@ -47,11 +46,9 @@ public class DepartmentController {
         try {
             model.addAttribute("departmentData", departmentServiceFacade.getDepartmentById(id));
             return "department_edit";
-        }
-        catch (DepartmentNotFoundException e) {
+        }catch (DepartmentNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
-        }
-        catch (Exception e) {
+        }catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
         }
         return "redirect:/departments";
@@ -82,8 +79,7 @@ public class DepartmentController {
             departmentServiceFacade.createDepartment(departmentData);
             redirectAttributes.addFlashAttribute("message", "Department added successfully");
 
-        }
-        catch (Exception e){
+        }catch (Exception e){
             redirectAttributes.addFlashAttribute("message", "Department add failed");
         }
         return "redirect:/departments";

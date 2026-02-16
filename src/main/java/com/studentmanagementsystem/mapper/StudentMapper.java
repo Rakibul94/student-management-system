@@ -63,6 +63,7 @@ public class StudentMapper {
         if (studentData.getDepartmentData() != null) {
             Department department = new Department();
             department.setId(studentData.getDepartmentData().getId());
+            department.setName(studentData.getDepartmentData().getName());
             student.setDepartment(department);
         }
     }

@@ -82,7 +82,8 @@ public class DepartmentController {
             departmentServiceFacade.createDepartment(departmentData);
             redirectAttributes.addFlashAttribute("message", "Department added successfully");
 
-        } catch (Exception e){
+        }
+        catch (Exception e){
             redirectAttributes.addFlashAttribute("message", "Department add failed");
         }
         return "redirect:/departments";

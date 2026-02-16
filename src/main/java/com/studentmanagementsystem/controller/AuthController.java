@@ -64,12 +64,14 @@ public class AuthController {
                     "message",
                     "Username Already Exists");
             return "redirect:/signup";
-        }catch (EmailAlreadyExistsException e){
+        }
+        catch (EmailAlreadyExistsException e){
             redirectAttributes.addFlashAttribute(
                     "message",
                     "Email Already Exists");
             return "redirect:/signup";
-        }catch (Exception e) {
+        }
+        catch (Exception e) {
             redirectAttributes.addFlashAttribute(
                     "message",
                     "Unexpected Exception");

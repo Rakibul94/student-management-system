@@ -35,7 +35,11 @@ public class StudentMapper {
     public Student toEntity(StudentData studentData) {
         if (studentData == null) return null;
         //No id is set as JPA generates id
+
         Student student = new Student();
+        if (studentData.getId() != null ) {
+            student.setId(studentData.getId());
+        }
         student.setName(studentData.getName());
         student.setEmail(studentData.getEmail());
         student.setCgpa(studentData.getCgpa());

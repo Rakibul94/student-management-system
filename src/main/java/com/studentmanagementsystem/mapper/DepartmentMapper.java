@@ -28,6 +28,9 @@ public class DepartmentMapper {
 
         Department department = new Department();
         //No id is set as JPA generates id
+        if (departmentData.getId() != null) {
+            department.setId(departmentData.getId());
+        }
         department.setName(departmentData.getName());
         return department;
     }

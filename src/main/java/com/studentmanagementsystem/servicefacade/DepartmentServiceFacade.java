@@ -5,11 +5,9 @@ import com.studentmanagementsystem.data.DepartmentData;
 import java.util.List;
 
 public interface DepartmentServiceFacade {
-
     List<DepartmentData> getAllDepartments();
     DepartmentData getDepartmentById(Long id);
     void createDepartment(DepartmentData departmentData);
     void updateDepartment(DepartmentData departmentData);
     void deleteDepartmentById(Long id);
-
 }

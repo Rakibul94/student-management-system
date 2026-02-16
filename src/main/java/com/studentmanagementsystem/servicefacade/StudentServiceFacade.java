@@ -10,5 +10,4 @@ public interface StudentServiceFacade {
     void createStudent(StudentData studentData);
     void updateStudent(StudentData studentData);
     void deleteStudentById(Long id);
-
 }

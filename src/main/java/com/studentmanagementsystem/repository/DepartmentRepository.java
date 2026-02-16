@@ -7,5 +7,4 @@ import com.studentmanagementsystem.model.Department;
 import java.util.Optional;
 
 public interface DepartmentRepository extends JpaRepository<Department, Long> {
-    Optional<Department> findByNameIgnoreCase(String name);
 }

@@ -18,17 +18,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(@NonNull String username)
-            throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(@NonNull String username) throws UsernameNotFoundException {
 
         if (username.isBlank()) {
             throw new UsernameNotFoundException("Username cannot be empty");
         }
 
         //Fetch a user from DB
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("Invalid username or password"));
+        User user = userRepository.findByUsername(username).orElseThrow(() ->
+                    new UsernameNotFoundException("Invalid username or password"));
 
         //Converting User Entity to Spring Security UserDetails
         //Spring Security uses this to compare login data

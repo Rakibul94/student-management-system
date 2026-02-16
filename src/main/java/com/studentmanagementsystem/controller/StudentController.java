@@ -47,9 +47,9 @@ public class StudentController {
             model.addAttribute("studentData", studentServiceFacade.getStudentById(id));
             model.addAttribute("departmentList", departmentServiceFacade.getAllDepartments());
             return "student_edit";
-        }catch (StudentNotFoundException e) {
+        } catch (StudentNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
-        }catch (Exception e) {
+        } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
         }
         return "redirect:/students";
@@ -66,7 +66,7 @@ public class StudentController {
         try {
             studentServiceFacade.createStudent(studentData);
             redirectAttributes.addFlashAttribute("message", "Student added successfully");
-        }catch (Exception e) {
+        } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", "Student add failed");
         }
         return "redirect:/students";
@@ -84,7 +84,7 @@ public class StudentController {
         try {
             studentServiceFacade.updateStudent(studentData);
             redirectAttributes.addFlashAttribute("message", "Update Successful");
-        }catch (Exception e) {
+        } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", "Update Failed");
         }
         return "redirect:/students";

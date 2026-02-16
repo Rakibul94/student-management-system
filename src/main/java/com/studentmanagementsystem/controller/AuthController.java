@@ -57,24 +57,22 @@ public class AuthController {
         //Using Redirect attribute
         try {
             userServiceFacade.signup(userData);
+            redirectAttributes.addFlashAttribute("message", "Signup successful!");
+            return "redirect:/login";
         } catch (UserAlreadyExistsException e) {
             redirectAttributes.addFlashAttribute(
                     "message",
                     "Username Already Exists");
-            return "redirect:/signup";
         } catch (EmailAlreadyExistsException e){
             redirectAttributes.addFlashAttribute(
                     "message",
                     "Email Already Exists");
-            return "redirect:/signup";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute(
                     "message",
                     "Unexpected Exception");
-            return "redirect:/signup";
         }
-        redirectAttributes.addFlashAttribute("message", "Signup successful!");
-        return "redirect:/login";
+        return "redirect:/signup";
         //Using Binding Result
 //         try{
 //             userServiceFacade.signup(userData);

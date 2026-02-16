@@ -26,14 +26,14 @@ public class DepartmentController {
                                    BindingResult bindingResult,
                                    RedirectAttributes redirectAttributes) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()){
             return "department_edit";
         }
-        try{
+        try {
             departmentServiceFacade.updateDepartment(departmentData);
             redirectAttributes.addFlashAttribute("message", "Update Successful");
         }
-        catch(Exception e){
+        catch (Exception e){
             redirectAttributes.addFlashAttribute("message", "Unexpected Exception");
         }
         return "redirect:/departments";
@@ -75,14 +75,14 @@ public class DepartmentController {
                                 RedirectAttributes redirectAttributes) {
 
         //If Input validity is violated bindingResult shows error
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()){
             return "department_add";
         }
-        try{
+        try {
             departmentServiceFacade.createDepartment(departmentData);
             redirectAttributes.addFlashAttribute("message", "Department added successfully");
 
-        }catch(Exception e){
+        } catch (Exception e){
             redirectAttributes.addFlashAttribute("message", "Department add failed");
         }
         return "redirect:/departments";

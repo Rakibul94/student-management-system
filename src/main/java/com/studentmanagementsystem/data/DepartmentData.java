@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotBlank;
 @NoArgsConstructor // Required by JPA
 @AllArgsConstructor // Generates all-args constructor
 public class DepartmentData {
+
     private Long id;
 
     @NotBlank(message = "Department name cannot be empty")
